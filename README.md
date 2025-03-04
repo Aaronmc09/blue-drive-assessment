@@ -12,8 +12,8 @@ This is a Django application containerized with Docker, using PostgreSQL as the 
 
 1. Clone the repository:
 ```bash
-git clone <repository-url>
-cd <project-directory>
+git clone git@github.com:Aaronmc09/blue-drive-assessment.git
+cd blue-drive-assessment
 ```
 
 2. Create environment file:
@@ -37,10 +37,55 @@ docker-compose up --build
 - Django application: http://localhost:8000
 - PostgreSQL database: localhost:5432
 
+## Authentication Screens
+
+### Login
+The login screen is accessible at `/auth/login/` and requires:
+- Email (used as the primary identifier)
+- Password
+
+Default admin login:
+- Email: specified in DJANGO_ADMIN_EMAIL (default: admin@django.com)
+- Password: specified in DJANGO_ADMIN_PASSWORD
+
+## Adding New Users
+
+There are two ways to create new users in the system:
+
+### 1. Via Django Admin Interface
+1. Log in to the admin interface at `/admin/` using admin credentials
+2. Navigate to "Users" under "Authentication and Authorization"
+3. Click "Add User" button
+4. Fill in the required fields:
+   - Email (required)
+   - Password
+   - Password confirmation
+5. Click "Save"
+6. Optionally, set additional fields like:
+   - Username (optional)
+   - First name
+   - Last name
+   - Staff status
+   - Superuser status
+
+### 2. Via Command Line
+Create a new user using the management command:
+```bash
+# For regular user
+docker-compose exec web python manage.py createsuperuser --email=user@example.com
+
+# For superuser (admin access)
+docker-compose exec web python manage.py createsuperuser
+```
+
+Note: The system uses email addresses as the primary identifier for users. Username is optional. 
+
 ## Using the application
 
 1. First, you must login at `/auth/login/`
-2. You can now access the Posts APIs at `/api/v1/posts/`
+2. Access the List and Create APIs at `/api/v1/posts/`
+3. Access Details, Update, Delete at `/api/v1/posts/<post_id>/`
+4. Access Add Comment action API at `/api/v1/posts/<post_id>/add_comment/`
 
 ## Project Structure
 
@@ -93,46 +138,3 @@ To stop the application and remove volumes:
 ```bash
 docker-compose down -v
 ```
-
-## Authentication Screens
-
-### Login
-The login screen is accessible at `/auth/login/` and requires:
-- Email (used as the primary identifier)
-- Password
-
-Default admin login:
-- Email: specified in DJANGO_ADMIN_EMAIL (default: admin@django.com)
-- Password: specified in DJANGO_ADMIN_PASSWORD
-
-## Adding New Users
-
-There are two ways to create new users in the system:
-
-### 1. Via Django Admin Interface
-1. Log in to the admin interface at `/admin/` using admin credentials
-2. Navigate to "Users" under "Authentication and Authorization"
-3. Click "Add User" button
-4. Fill in the required fields:
-   - Email (required)
-   - Password
-   - Password confirmation
-5. Click "Save"
-6. Optionally, set additional fields like:
-   - Username (optional)
-   - First name
-   - Last name
-   - Staff status
-   - Superuser status
-
-### 2. Via Command Line
-Create a new user using the management command:
-```bash
-# For regular user
-docker-compose exec web python manage.py createsuperuser --email=user@example.com
-
-# For superuser (admin access)
-docker-compose exec web python manage.py createsuperuser
-```
-
-Note: The system uses email addresses as the primary identifier for users. Username is optional. 
