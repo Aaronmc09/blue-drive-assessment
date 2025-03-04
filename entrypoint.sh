@@ -11,8 +11,7 @@ python manage.py migrate
 # Create superuser
 echo "Creating superuser..."
 python manage.py shell << END
-from django.contrib.auth import get_user_model
-User = get_user_model()
+from author.models import User
 import os
 
 admin_email = os.getenv('DJANGO_ADMIN_EMAIL', 'admin@django.com')
@@ -23,7 +22,7 @@ if not admin_password:
     exit(1)
 
 if not User.objects.filter(email=admin_email).exists():
-    User.objects.create_superuser(admin_email, admin_email, admin_password)
+    User.objects.create_superuser(email=admin_email, password=admin_password)
     print('Superuser created successfully!')
 else:
     print('Superuser already exists.')

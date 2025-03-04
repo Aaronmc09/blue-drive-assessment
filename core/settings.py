@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    
+    "rest_framework",
     # Local apps
     "author",
     "post",
@@ -130,6 +130,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 STATIC_URL = "static/"
+STATIC_ROOT = BASE_DIR / "staticfiles"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
@@ -137,8 +138,8 @@ STATIC_URL = "static/"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # Authentication settings
-LOGIN_REDIRECT_URL = '/'  # Redirect to home page after login
-LOGOUT_REDIRECT_URL = '/'  # Redirect to home page after logout
+LOGIN_REDIRECT_URL = '/api/v1/posts/'  # Redirect to home page after login
+LOGOUT_REDIRECT_URL = '/auth/login/'  # Redirect to home page after logout
 LOGIN_URL = '/auth/login/'  # The login page URL
 
 # Email settings for password reset (use console backend for development)

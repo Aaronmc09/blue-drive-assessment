@@ -37,6 +37,11 @@ docker-compose up --build
 - Django application: http://localhost:8000
 - PostgreSQL database: localhost:5432
 
+## Using the application
+
+1. First, you must login at `/auth/login/`
+2. You can now access the Posts APIs at `/api/v1/posts/`
+
 ## Project Structure
 
 - `Dockerfile`: Contains the configuration for building the Django application container
@@ -96,12 +101,6 @@ The login screen is accessible at `/auth/login/` and requires:
 Default admin login:
 - Email: specified in DJANGO_ADMIN_EMAIL (default: admin@django.com)
 - Password: specified in DJANGO_ADMIN_PASSWORD
-
-### Password Reset
-Users can reset their password at `/auth/password_reset/` by:
-1. Entering their email address
-2. Following the reset link (printed to console in development)
-3. Setting a new password
 
 ## Adding New Users
 
