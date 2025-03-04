@@ -143,3 +143,6 @@ LOGIN_URL = '/auth/login/'  # The login page URL
 
 # Email settings for password reset (use console backend for development)
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+# Custom user model
+AUTH_USER_MODEL = 'author.User'

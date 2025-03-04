@@ -89,27 +89,48 @@ docker-compose down -v
 ## Authentication Screens
 
 ### Login
-The login screen is accessible at `/login/` and requires:
-- Username/Email
+The login screen is accessible at `/auth/login/` and requires:
+- Email (used as the primary identifier)
 - Password
 
 Default admin login:
 - Email: specified in DJANGO_ADMIN_EMAIL (default: admin@django.com)
 - Password: specified in DJANGO_ADMIN_PASSWORD
 
-### Registration
-New users can register at `/register/` by providing:
-- Email address
-- Username
-- Password
-- Password confirmation
-
-After registration, users will need to:
-1. Verify their email address (if email verification is enabled)
-2. Log in using their credentials
-
 ### Password Reset
-Users can reset their password at `/password-reset/` by:
+Users can reset their password at `/auth/password_reset/` by:
 1. Entering their email address
-2. Following the reset link sent to their email
-3. Setting a new password 
+2. Following the reset link (printed to console in development)
+3. Setting a new password
+
+## Adding New Users
+
+There are two ways to create new users in the system:
+
+### 1. Via Django Admin Interface
+1. Log in to the admin interface at `/admin/` using admin credentials
+2. Navigate to "Users" under "Authentication and Authorization"
+3. Click "Add User" button
+4. Fill in the required fields:
+   - Email (required)
+   - Password
+   - Password confirmation
+5. Click "Save"
+6. Optionally, set additional fields like:
+   - Username (optional)
+   - First name
+   - Last name
+   - Staff status
+   - Superuser status
+
+### 2. Via Command Line
+Create a new user using the management command:
+```bash
+# For regular user
+docker-compose exec web python manage.py createsuperuser --email=user@example.com
+
+# For superuser (admin access)
+docker-compose exec web python manage.py createsuperuser
+```
+
+Note: The system uses email addresses as the primary identifier for users. Username is optional. 
