@@ -84,4 +84,32 @@ docker-compose down
 To stop the application and remove volumes:
 ```bash
 docker-compose down -v
-``` 
+```
+
+## Authentication Screens
+
+### Login
+The login screen is accessible at `/login/` and requires:
+- Username/Email
+- Password
+
+Default admin login:
+- Email: specified in DJANGO_ADMIN_EMAIL (default: admin@django.com)
+- Password: specified in DJANGO_ADMIN_PASSWORD
+
+### Registration
+New users can register at `/register/` by providing:
+- Email address
+- Username
+- Password
+- Password confirmation
+
+After registration, users will need to:
+1. Verify their email address (if email verification is enabled)
+2. Log in using their credentials
+
+### Password Reset
+Users can reset their password at `/password-reset/` by:
+1. Entering their email address
+2. Following the reset link sent to their email
+3. Setting a new password 
