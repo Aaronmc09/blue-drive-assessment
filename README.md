@@ -77,6 +77,9 @@ docker-compose exec web python manage.py migrate
 
 # Create a superuser
 docker-compose exec web python manage.py createsuperuser
+
+# Run unit tests
+docker-compose exec web python manage.py test
 ```
 
 ## Stopping the Application

@@ -1,12 +1,12 @@
 from rest_framework import serializers
 from .models import Comment
 from author.models import User
-from post.serializers import PostSerializer
+from post.models import Post
 
 class CommentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Comment
-        fields = ['content', 'user', 'post']
+        fields = ['id', 'content', 'user', 'post']
     
     user = serializers.PrimaryKeyRelatedField(queryset=User.objects.all())
-    post = PostSerializer(read_only=True)
+    post = serializers.PrimaryKeyRelatedField(queryset=Post.objects.all())
